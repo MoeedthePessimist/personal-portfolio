@@ -13,7 +13,7 @@ import {
 import { BiLogoPostgresql, BiLogoRedux } from "react-icons/bi";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import { CgFigma } from "react-icons/cg";
-import { SiJest } from "react-icons/si";
+import { SiJest, SiNestjs } from "react-icons/si";
 import { DiGoogleCloudPlatform } from "react-icons/di";
 
 export default function Skills() {
@@ -29,6 +29,7 @@ export default function Skills() {
     { id: 9, name: "Tailwind", icon: <RiTailwindCssFill size={50} /> },
     { id: 10, name: "Figma", icon: <CgFigma size={50} /> },
     { id: 11, name: "Express.js", icon: <FaNodeJs size={50} /> },
+    { id: 18, name: "NestJS", icon: <SiNestjs size={50} /> },
     { id: 12, name: "Django", icon: <FaPython size={50} /> },
     { id: 13, name: "Flask", icon: <FaFlask size={50} /> },
     { id: 14, name: "AWS", icon: <FaAws size={50} /> },
@@ -40,21 +41,48 @@ export default function Skills() {
   const [experiences] = useState([
     {
       id: 1,
-      company: "Google",
-      role: "Lead Software Engineer",
-      period: "Nov 2019 - Present",
+      company: "Leetpros",
+      role: "Software Development Engineer",
+      period: "April 2024 - Present",
       description:
-        "Developed innovative solutions for Google's core search algorithms, optimizing search accuracy and user experience. Developed innovative solutions for Google's core search algorithms, optimizing search accuracy and user experience. Developed innovative solutions for Google's core search algorithms, optimizing search accuracy and user experience. Developed innovative solutions for Google's core search algorithms, optimizing search accuracy and user experience.",
-      logo: "/assets/google.svg",
+        "Reviewed code to maintain quality standards and contributed to various codebases across projects. Gained expertise in Generative AI by developing a demo project and played a key role in launching the V2 version of an existing website. Served as the lead frontend engineer on a project, driving development and ensuring a seamless user experience.",
+      logo: "/assets/leet_pros_logo.jpeg",
     },
     {
       id: 2,
-      company: "Youtube",
-      role: "Software Engineer",
-      period: "Jan 2017 - Oct 2019",
+      company: "Cliff Digital Media",
+      role: "Software Developer (Part Time)",
+      period: "April 2024 - Present",
       description:
-        "At Youtube, I served as a  Software Engineer, focusing on the design and implementation of backend systems for the social media giant's dynamic platform. Working on projects that involved large-scale data processing and user engagement features, I leveraged my expertise to ensure seamless functionality and scalability.",
-      logo: "/assets/youtube.svg",
+        "Developed and delivered fully functional websites using popular website builders, including Shopify, WordPress, and Wix, ensuring high-quality results and client satisfaction.",
+      logo: "/assets/cliff_logo.jpeg",
+    },
+    {
+      id: 3,
+      company: "Devaxl",
+      role: "Senior Software Engineer",
+      period: "Jan 2024 - April 2024",
+      description:
+        "Worked as a lead for four projects, successfully transitioning two to live production, while conducting thorough code reviews and addressing complex use cases to deliver robust solutions. Collaborated with clients to gather requirements and provide regular updates.",
+      logo: "/assets/devaxl_logo.jpeg",
+    },
+    {
+      id: 4,
+      company: "Devaxl",
+      role: "Associate Software Engineer",
+      period: "Dec 2022 - Jan 2024",
+      description:
+        "Performed primary code reviews, contributed to critical use case development, and ensured code consistency through best practices. Assisted in project setup under lead guidance and supported efficient project execution.",
+      logo: "/assets/devaxl_logo.jpeg",
+    },
+    {
+      id: 5,
+      company: "Inexins",
+      role: "Frontend Software Engineer",
+      period: "July 2022 - Dec 2022",
+      description:
+        "Developed web applications using Angular, ensuring an intuitive user experience for students and university staff. Collaborated with backend developers for seamless integration and worked with UX/UI designers to transform design mockups into dynamic, interactive interfaces.",
+      logo: "/assets/inexins_logo.jpeg",
     },
   ]);
 
