@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaJs, FaReact, FaNodeJs, FaPython, FaDatabase,FaJava } from "react-icons/fa";
-import { BiLogoPostgresql } from "react-icons/bi";
-import { RiNextjsFill,RiTailwindCssFill } from "react-icons/ri";
+import {
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaDatabase,
+  FaJava,
+  FaAws,
+  FaFlask,
+} from "react-icons/fa";
+import { BiLogoPostgresql, BiLogoRedux } from "react-icons/bi";
+import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import { CgFigma } from "react-icons/cg";
+import { SiJest } from "react-icons/si";
+import { DiGoogleCloudPlatform } from "react-icons/di";
 
 export default function Skills() {
   const [skills] = useState([
@@ -17,6 +28,13 @@ export default function Skills() {
     { id: 8, name: "Next.js", icon: <RiNextjsFill size={50} /> },
     { id: 9, name: "Tailwind", icon: <RiTailwindCssFill size={50} /> },
     { id: 10, name: "Figma", icon: <CgFigma size={50} /> },
+    { id: 11, name: "Express.js", icon: <FaNodeJs size={50} /> },
+    { id: 12, name: "Django", icon: <FaPython size={50} /> },
+    { id: 13, name: "Flask", icon: <FaFlask size={50} /> },
+    { id: 14, name: "AWS", icon: <FaAws size={50} /> },
+    { id: 15, name: "React Native", icon: <FaReact size={50} /> },
+    { id: 16, name: "Jest", icon: <SiJest size={50} /> },
+    { id: 17, name: "GCP", icon: <DiGoogleCloudPlatform size={50} /> },
   ]);
 
   const [experiences] = useState([
@@ -43,7 +61,6 @@ export default function Skills() {
   return (
     <div className="mt-3 lg:mt-16" id="skills">
       <div className="px-5 lg:px-28">
-
         <motion.h2
           className="text-2xl lg:text-4xl text-center"
           initial={{ opacity: 0, y: -20 }}
@@ -62,7 +79,11 @@ export default function Skills() {
               className="bg-white border-2 hover:bg-black hover:text-white transition-all cursor-pointer border-black rounded p-3 h-36 w-36 lg:h-44 lg:w-44 flex flex-col items-center justify-center gap-5"
               initial={{ opacity: 0, y: 5 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: skill.id * 0.1 }}
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                delay: skill.id * 0.1,
+              }}
               viewport={{ once: true }}
             >
               {skill.icon}
@@ -70,7 +91,6 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
-
       </div>
 
       {/* Experience Section */}
@@ -118,7 +138,6 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </div>
   );
