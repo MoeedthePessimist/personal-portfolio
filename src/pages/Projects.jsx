@@ -1,7 +1,16 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import Projects from "../components/Projects";
+import Footer from "../components/Footer";
 
-const Projects = () => {
-  return <div>Projects</div>;
+const ProjectsPage = () => {
+  return (
+    <>
+      <Navbar />
+      <Projects />
+      <Footer />
+    </>
+  );
 };
 
-export default Projects;
+export default ProjectsPage;

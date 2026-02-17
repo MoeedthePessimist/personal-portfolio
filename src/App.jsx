@@ -1,25 +1,19 @@
 import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import Skills from './components/Skills'
-import Navbar from './components/Navbar'
-import About from './components/About'
-import Footer from './components/Footer'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
+import Projects from './pages/Projects'
 import CustomCursor from './utils/CursorAnimation'
 
 export default function App() {
   return (
     <div className='font-sora scroll-smooth overflow-x-hidden'>
       <CustomCursor/>
-      <Navbar />
-      <Home />
-      <Skills />
-      <About />
-      <Projects />
-      <Contact />
-
-      <Footer />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+      </Router>
     </div>
   )
 }
