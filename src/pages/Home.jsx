@@ -15,7 +15,7 @@ export default function Home() {
       <Hero />
       <Skills />
       <About />
-      <Projects />
+      <Projects showAll={false} previewCount={3} />
       <Contact />
       <Footer />
     </div>
