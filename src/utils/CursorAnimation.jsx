@@ -1,48 +1,94 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function CustomCursor() {
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [cursorSize, setCursorSize] = useState(32); // Default size
+  const [hovered, setHovered] = useState(false);
+  const [clicking, setClicking] = useState(false);
+
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springX = useSpring(cursorX, { stiffness: 600, damping: 40 });
+  const springY = useSpring(cursorY, { stiffness: 600, damping: 40 });
+
+  // Trailing dot — slower spring
+  const trailX = useSpring(cursorX, { stiffness: 120, damping: 20 });
+  const trailY = useSpring(cursorY, { stiffness: 120, damping: 20 });
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
+    const move = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
-    const handleMouseOverText = () => {
-      setCursorSize(80); // Increase cursor size when hovering over text
-    };
+    const enterHover = () => setHovered(true);
+    const leaveHover = () => setHovered(false);
+    const mouseDown = () => setClicking(true);
+    const mouseUp = () => setClicking(false);
 
-    const handleMouseLeaveText = () => {
-      setCursorSize(32); // Reset cursor size when leaving text
-    };
+    window.addEventListener("mousemove", mouseDown);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mousedown", mouseDown);
+    window.addEventListener("mouseup", mouseUp);
 
-    // Select all text elements
-    const textElements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6");
-
-    textElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseOverText);
-      el.addEventListener("mouseleave", handleMouseLeaveText);
+    const interactives = document.querySelectorAll(
+      "a, button, [role=button], input, textarea, select, label, [data-cursor]",
+    );
+    interactives.forEach((el) => {
+      el.addEventListener("mouseenter", enterHover);
+      el.addEventListener("mouseleave", leaveHover);
     });
 
-    window.addEventListener("mousemove", handleMouseMove);
-
     return () => {
-      textElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseOverText);
-        el.removeEventListener("mouseleave", handleMouseLeaveText);
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mousedown", mouseDown);
+      window.removeEventListener("mouseup", mouseUp);
+      interactives.forEach((el) => {
+        el.removeEventListener("mouseenter", enterHover);
+        el.removeEventListener("mouseleave", leaveHover);
       });
-      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [cursorX, cursorY]);
 
   return (
-    <motion.div
-      className="fixed bg-white rounded-full pointer-events-none mix-blend-difference z-50"
-      style={{ width: cursorSize, height: cursorSize }}
-      animate={{ x: cursorPosition.x - cursorSize / 2, y: cursorPosition.y - cursorSize / 2 }}
-      transition={{ type: "spring", stiffness: 200, damping: 20 }}
-    />
+    <>
+      {/* Main cursor ring */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        style={{
+          x: springX,
+          y: springY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      >
+        <motion.div
+          className="rounded-full border-2 border-accent-amber"
+          animate={{
+            width: hovered ? 48 : clicking ? 16 : 28,
+            height: hovered ? 48 : clicking ? 16 : 28,
+            opacity: 1,
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 22 }}
+        />
+      </motion.div>
+
+      {/* Trailing dot */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9998]"
+        style={{
+          x: trailX,
+          y: trailY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      >
+        <motion.div
+          className="w-2 h-2 rounded-full bg-accent-amber"
+          animate={{ scale: clicking ? 0.5 : 1, opacity: hovered ? 0 : 0.7 }}
+          transition={{ duration: 0.15 }}
+        />
+      </motion.div>
+    </>
   );
 }
