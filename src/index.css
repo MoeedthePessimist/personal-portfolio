@@ -1,5 +1,179 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── Design System Tokens ─────────────────────────────────────────────────── */
+:root {
+  --bg-primary: #0c0c0f;
+  --bg-secondary: #111117;
+  --bg-card: #16161e;
+
+  --accent-amber: #f59e0b;
+  --accent-cyan: #22d3ee;
+  --accent-rose: #fb7185;
+  --accent-violet: #a78bfa;
+  --accent-lime: #84cc16;
+
+  --text-primary: #f1f0ee;
+  --text-muted: #6b7280;
+  --text-dim: #374151;
+
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-mid: rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: none;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-amber);
+  border-radius: 99px;
+}
+
+/* ─── Gradient text utility ─────────────────────────────────────────────────── */
+.grad-amber {
+  background: linear-gradient(135deg, #f59e0b 0%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-cyan {
+  background: linear-gradient(135deg, #22d3ee 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-rose {
+  background: linear-gradient(135deg, #fb7185 0%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Noise overlay ─────────────────────────────────────────────────────────── */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Glowing button ─────────────────────────────────────────────────────────── */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #f59e0b33, #fb923c22);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-glow:hover::before {
+  opacity: 1;
+}
+.btn-glow:hover {
+  box-shadow:
+    0 0 24px rgba(245, 158, 11, 0.35),
+    0 0 48px rgba(245, 158, 11, 0.15);
+}
+
+/* ─── Floating animation ────────────────────────────────────────────────────── */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ─── Pulse ring ────────────────────────────────────────────────────────────── */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+.pulse-ring {
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+/* ─── Shimmer effect ────────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 30%,
+    rgba(245, 158, 11, 0.15) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* ─── Grid background ───────────────────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Scanline effect ───────────────────────────────────────────────────────── */
+.scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
