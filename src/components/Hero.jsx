@@ -1,130 +1,276 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { IoLogoLinkedin, IoLogoTwitter } from "react-icons/io5";
+import { IoLogoLinkedin } from "react-icons/io5";
 import { BiLogoWindows } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { TypeAnimation } from "react-type-animation";
 import socialLinks from "../assets/social.json";
 
+const SOCIALS = [
+  {
+    Icon: BiLogoWindows,
+    color: "#f59e0b",
+    bg: "rgba(245,158,11,0.12)",
+    border: "rgba(245,158,11,0.3)",
+  },
+  {
+    Icon: IoLogoLinkedin,
+    color: "#22d3ee",
+    bg: "rgba(34,211,238,0.12)",
+    border: "rgba(34,211,238,0.3)",
+  },
+  {
+    Icon: BsGithub,
+    color: "#a78bfa",
+    bg: "rgba(167,139,250,0.12)",
+    border: "rgba(167,139,250,0.3)",
+  },
+];
+
+// Floating decorative orb
+function Orb({ className, color, size = 300, delay = 0 }) {
+  return (
+    <motion.div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: size,
+        height: size,
+        background: `radial-gradient(circle, ${color}22 0%, transparent 70%)`,
+        filter: "blur(40px)",
+      }}
+      animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
+      transition={{
+        duration: 7 + delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function Hero() {
   return (
-    <div className="mt-20" id="hero">
-      <div className="flex justify-between py-10 items-center px-5 lg:px-28 lg:flex-row flex-col-reverse">
+    <div
+      className="relative min-h-screen flex items-center overflow-hidden bg-bg-primary grid-bg"
+      id="hero"
+    >
+      {/* ── Background orbs ─────────────────────────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <Orb className="top-20 -left-20" color="#f59e0b" size={500} delay={0} />
+        <Orb
+          className="bottom-10 right-0"
+          color="#22d3ee"
+          size={400}
+          delay={2}
+        />
+        <Orb
+          className="top-1/2 left-1/2"
+          color="#a78bfa"
+          size={350}
+          delay={4}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(at 15% 25%, rgba(245,158,11,0.1) 0px, transparent 50%), radial-gradient(at 85% 75%, rgba(34,211,238,0.08) 0px, transparent 50%)",
+          }}
+        />
+      </div>
+
+      {/* ── Content ─────────────────────────────────────────────────────── */}
+      <div className="relative z-10 w-full flex justify-between py-10 items-center px-5 lg:px-28 lg:flex-row flex-col-reverse mt-20">
+        {/* Left: text */}
         <motion.div
-          className="lg:w-[45%]"
+          className="lg:w-[50%]"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
         >
+          {/* Status pill */}
           <motion.div
-            className="text-2xl lg:text-5xl flex flex-col mt-8 lg:mt-0 gap-2 lg:gap-5 text-nowrap"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent-lime/30 bg-accent-lime/8 mb-6"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <span className="w-2 h-2 rounded-full bg-accent-lime pulse-ring" />
+            <span className="text-accent-lime text-xs font-semibold tracking-wider uppercase">
+              Available for work
+            </span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.div
+            className="text-3xl lg:text-6xl flex flex-col gap-3 lg:gap-4"
             initial="hidden"
             animate="visible"
             variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: { staggerChildren: 0.2, ease: "easeInOut" },
-              },
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.15 } },
             }}
           >
-            <motion.h2
+            <motion.h1
+              className="text-text-primary font-light"
               variants={{
-                hidden: { opacity: 0, y: 10 },
+                hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
             >
               Hello,{" "}
-              <TypeAnimation
-                sequence={[
-                  "I am Abdul Moeed",
-                  1000,
-
-                  // 'I am a UI/UX Designer',
-                  // 1000,
-                ]}
-                speed={10}
-                style={{ fontWeight: 600 }}
-                repeat={Infinity}
-              />
-            </motion.h2>
-            <motion.h2
-              variants={{
-                hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
-              <span className="font-extrabold">Fullstack</span>{" "}
-              <span
-                className="text-white font-extrabold"
-                style={{ WebkitTextStroke: "1px black" }}
-              >
-                Developer
+              <span className="font-bold">
+                <TypeAnimation
+                  sequence={[
+                    "I am Abdul Moeed",
+                    2000,
+                    "I Build for the Web",
+                    2000,
+                  ]}
+                  speed={40}
+                  repeat={Infinity}
+                  style={{ color: "#f59e0b" }}
+                />
               </span>
-            </motion.h2>
-            <motion.h2
+            </motion.h1>
+
+            <motion.h1
               variants={{
-                hidden: { opacity: 0, y: 10 },
+                hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              Based In <span className="font-extrabold">Pakistan.</span>
-            </motion.h2>
+              <span className="font-extrabold text-text-primary">
+                Fullstack{" "}
+              </span>
+              <span className="font-extrabold grad-cyan">Developer</span>
+            </motion.h1>
+
+            <motion.h1
+              className="font-light text-text-primary"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              Based In{" "}
+              <span className="font-extrabold grad-rose">Pakistan.</span>
+            </motion.h1>
           </motion.div>
 
+          {/* Bio */}
           <motion.p
-            className="text-[#71717A] text-sm lg:text-base mt-5"
+            className="text-text-muted text-sm lg:text-base mt-6 max-w-lg leading-7"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
           >
-            I am a Software Engineer based in Islamabad, Pakistan, with a
-            passion for building robust, scalable, and user-centric digital
-            solutions. With a strong foundation in Computer Science from Comsats
-            University , I have spent my career navigating complex technical
-            challenges across diverse industries, from healthcare and logistics
-            to e-learning and interior design.
+            Software Engineer from Islamabad, Pakistan — building robust,
+            scalable, and user-centric digital solutions across healthcare,
+            logistics, e-learning, and more.
           </motion.p>
 
+          {/* CTAs + socials */}
           <motion.div
-            className="flex items-center gap-x-5 mt-10 lg:mt-14"
+            className="flex flex-wrap items-center gap-4 mt-10"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
+            transition={{ delay: 0.9 }}
           >
-            {[BiLogoWindows, IoLogoLinkedin, BsGithub].map((Icon, index) => (
+            <a
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("projects")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="px-6 py-3 rounded-xl bg-accent-amber text-bg-primary font-bold text-sm btn-glow hover:bg-accent-orange transition-colors"
+            >
+              View My Work
+            </a>
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="px-6 py-3 rounded-xl border border-white/12 text-text-primary font-semibold text-sm hover:border-white/25 hover:bg-white/5 transition-all"
+            >
+              Get In Touch
+            </a>
+          </motion.div>
+
+          {/* Social icons */}
+          <motion.div
+            className="flex items-center gap-3 mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1 }}
+          >
+            {SOCIALS.map(({ Icon, color, bg, border }, i) => (
               <motion.a
-                key={index}
-                href={socialLinks[index]}
+                key={i}
+                href={socialLinks[i]}
                 target="_blank"
-                className="bg-white p-2 lg:p-3 rounded border-2 border-black"
-                whileHover={{
-                  scale: 1.1,
-                  backgroundColor: "#000",
-                  color: "#fff",
-                }}
-                whileTap={{ scale: 0.9 }}
+                rel="noopener noreferrer"
+                className="p-3 rounded-xl border transition-all duration-300"
+                style={{ background: bg, borderColor: border, color }}
+                whileHover={{ scale: 1.12, y: -2 }}
+                whileTap={{ scale: 0.92 }}
               >
-                <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
+                <Icon className="w-5 h-5" />
               </motion.a>
             ))}
+
+            <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-white/10 to-transparent" />
+            <span className="text-text-muted text-xs font-medium">
+              Follow me
+            </span>
           </motion.div>
         </motion.div>
 
+        {/* Right: hero illustration with float animation */}
         <motion.div
-          className="lg:w-[55%] w-full"
+          className="lg:w-[48%] w-full"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
         >
-          <img
-            className="h-full w-full"
-            src="/assets/hero-vector.svg"
-            alt="Hero Vector"
-          />
+          <div className="relative">
+            {/* Glow ring behind illustration */}
+            <div className="absolute inset-8 rounded-full bg-accent-amber/10 blur-3xl" />
+            <div className="absolute inset-16 rounded-full bg-accent-cyan/8 blur-2xl" />
+            <motion.img
+              className="relative z-10 h-full w-full drop-shadow-2xl"
+              src="/assets/hero-vector.svg"
+              alt="Hero Illustration"
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
         </motion.div>
       </div>
+
+      {/* ── Scroll indicator ────────────────────────────────────────────── */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        <span className="text-text-muted text-xs tracking-widest uppercase font-medium">
+          Scroll
+        </span>
+        <motion.div
+          className="w-px h-10 bg-gradient-to-b from-accent-amber to-transparent"
+          animate={{ scaleY: [1, 0.4, 1], opacity: [1, 0.4, 1] }}
+          transition={{ duration: 1.8, repeat: Infinity }}
+        />
+      </motion.div>
     </div>
   );
 }
