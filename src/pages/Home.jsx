@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import CustomCursor from "../utils/CursorAnimation";
-import { FloatingLines } from "../components/animations";
+import { Galaxy } from "../components/animations";
 
 export default function Home() {
   return (
@@ -14,14 +14,19 @@ export default function Home() {
       <CustomCursor />
 
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <FloatingLines
-          lineCount={18}
-          colors={["#f59e0b", "#22d3ee", "#a78bfa"]}
-          speed={0.4}
-          thickness={1.2}
-          opacity={0.18}
-          curved={true}
-          interactive={true}
+        <Galaxy
+          mouseRepulsion
+          mouseInteraction
+          density={1}
+          glowIntensity={0.3}
+          saturation={0}
+          hueShift={140}
+          twinkleIntensity={0.3}
+          rotationSpeed={0.1}
+          repulsionStrength={2}
+          autoCenterRepulsion={0}
+          starSpeed={0.5}
+          speed={1}
         />
       </div>
 
