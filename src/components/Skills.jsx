@@ -269,7 +269,7 @@ function ExperienceCard({ exp, index }) {
 // ── Page section ──────────────────────────────────────────────────────────────
 export default function Skills() {
   return (
-    <div className="mt-16 lg:mt-24" id="skills">
+    <div className="pt-16 lg:pt-24" id="skills">
       {/* ── Skills grid ────────────────────────────────────────────────── */}
       <div className="px-5 lg:px-28">
         <motion.div
@@ -297,13 +297,13 @@ export default function Skills() {
       {/* ── Experience ─────────────────────────────────────────────────── */}
       <div className="relative mt-20 lg:mt-28 py-16 lg:py-24 overflow-hidden">
         {/* Section background */}
-        <div className="absolute inset-0 bg-bg-secondary grid-bg" />
+        <div className="absolute inset-0" />
         <div
           className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at top center, rgba(245,158,11,0.05) 0%, transparent 60%)",
-          }}
+          // style={{
+          //   background:
+          //     "radial-gradient(ellipse at top center, rgba(245,158,11,0.05) 0%, transparent 60%)",
+          // }}
         />
 
         <div className="relative z-10 px-5 lg:px-28">

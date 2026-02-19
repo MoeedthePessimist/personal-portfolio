@@ -36,14 +36,14 @@ export default function About() {
         >
           <div className="relative">
             {/* Gradient frame */}
-            <div
+            {/* <div
               className="absolute -inset-[2px] rounded-2xl"
               style={{
-                background:
-                  "linear-gradient(135deg, rgba(245,158,11,0.5), rgba(34,211,238,0.3), rgba(167,139,250,0.2))",
+                // background:
+                //   "linear-gradient(135deg, rgba(245,158,11,0.5), rgba(34,211,238,0.3), rgba(167,139,250,0.2))",
                 padding: "2px",
               }}
-            />
+            /> */}
             <div className="relative rounded-2xl overflow-hidden bg-bg-card p-4">
               <img
                 src="/assets/about-me.svg"

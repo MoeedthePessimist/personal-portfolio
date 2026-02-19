@@ -53,7 +53,7 @@ function Orb({ className, color, size = 300, delay = 0 }) {
 export default function Hero() {
   return (
     <div
-      className="relative min-h-screen flex items-center overflow-hidden bg-bg-primary grid-bg"
+      className="relative min-h-screen flex items-center overflow-hidden "
       id="hero"
     >
       {/* ── Background orbs ─────────────────────────────────────────────── */}

@@ -19,7 +19,7 @@ export default function Projects({ showAll = false, previewCount = 3 }) {
     : allProjects.slice(0, previewCount);
 
   return (
-    <section className="bg-black px-5 lg:px-28 py-16 lg:py-24" id="projects">
+    <section className="px-5 lg:px-28 py-16 lg:py-24" id="projects">
       {/* ── Section header ──────────────────────────────────────────────── */}
       <motion.div
         className="text-center mb-16 lg:mb-24"
