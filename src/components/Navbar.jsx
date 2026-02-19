@@ -53,7 +53,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="lg:px-28 px-5 py-4 flex items-center justify-between">
+      <div className="lg:px-28 px-5 flex items-center justify-between">
         {/* Logo */}
         <motion.div
           whileHover={{ scale: 1.05 }}
@@ -61,7 +61,7 @@ export default function Navbar() {
           onClick={() => scrollToSection("hero")}
           className="cursor-pointer relative"
         >
-          <img className="h-9 invert" src="/assets/logo.svg" alt="Logo" />
+          <img className="h-20" src="/assets/small-logo.png" alt="Logo" />
           <div className="absolute inset-0 blur-xl opacity-30 bg-accent-amber rounded-full scale-50 pointer-events-none" />
         </motion.div>
 

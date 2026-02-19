@@ -5,7 +5,7 @@ import { BiLogoWindows } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { TypeAnimation } from "react-type-animation";
 import socialLinks from "../assets/social.json";
-import { RotatingText } from "./animations";
+import { ProfileCard, RotatingText } from "./animations";
 
 const SOCIALS = [
   {
@@ -240,6 +240,33 @@ export default function Hero() {
               Follow me
             </span>
           </motion.div>
+        </motion.div>
+
+        {/* Right: hero illustration with float animation */}
+        <motion.div
+          className="lg:w-[50%] w-full"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+        >
+          <div className="relative flex justify-center mb-4 md:mb-0 ">
+            {/* Glow ring behind illustration */}
+
+            <ProfileCard
+              name="Abdul Moeed"
+              title="Software Engineer"
+              handle="moeed-io"
+              status="Online"
+              avatarUrl="/assets/hero.png"
+              showUserInfo={false}
+              enableTilt={true}
+              enableMobileTilt={false}
+              behindGlowColor="rgba(125, 190, 255, 0.67)"
+              iconUrl="/assets/small-logo.png"
+              behindGlowEnabled
+              innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+            />
+          </div>
         </motion.div>
       </div>
     </div>
