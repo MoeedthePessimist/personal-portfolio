@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { TbDownload } from "react-icons/tb";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 
-const NAV_ITEMS = ["about", "skills", "projects", "contact"];
+const NAV_ITEMS = ["skills", "about", "projects", "contact"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

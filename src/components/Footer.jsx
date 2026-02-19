@@ -30,24 +30,14 @@ export default function Footer() {
         style={{ background: "linear-gradient(135deg, #f59e0b, #22d3ee)" }}
       />
 
-      <div className="relative z-10 px-5 lg:px-28 py-8 lg:py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="relative z-10 px-5 lg:px-28 py-2 lg:py-4 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Logo */}
         <motion.img
-          className="h-7 lg:h-9 invert brightness-0 invert"
-          src="/assets/logo.svg"
+          className="h-14 lg:h-20 brightness-0 invert"
+          src="/assets/small-logo.png"
           alt="Logo"
           whileHover={{ scale: 1.05 }}
         />
-
-        {/* Center text */}
-        <div className="text-center">
-          <p className="text-text-muted text-xs">© 2025 Personal Portfolio</p>
-          <p className="text-text-muted text-xs mt-0.5">
-            Crafted with{" "}
-            <span className="grad-amber font-semibold">passion</span> by{" "}
-            <span className="text-text-primary font-semibold">SK</span>
-          </p>
-        </div>
 
         {/* Social icons */}
         <div className="flex items-center gap-3">
