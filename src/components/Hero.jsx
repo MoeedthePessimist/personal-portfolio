@@ -5,6 +5,7 @@ import { BiLogoWindows } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { TypeAnimation } from "react-type-animation";
 import socialLinks from "../assets/social.json";
+import { RotatingText } from "./animations";
 
 const SOCIALS = [
   {
@@ -53,7 +54,7 @@ function Orb({ className, color, size = 300, delay = 0 }) {
 export default function Hero() {
   return (
     <div
-      className="relative min-h-screen flex items-center overflow-hidden "
+      className="relative min-h-screen flex items-center overflow-hidden"
       id="hero"
     >
       {/* ── Background orbs ─────────────────────────────────────────────── */}
@@ -122,12 +123,7 @@ export default function Hero() {
               Hello,{" "}
               <span className="font-bold">
                 <TypeAnimation
-                  sequence={[
-                    "I am Abdul Moeed",
-                    2000,
-                    "I Build for the Web",
-                    2000,
-                  ]}
+                  sequence={["I am Abdul Moeed", 2000, "I Build Apps", 2000]}
                   speed={40}
                   repeat={Infinity}
                   style={{ color: "#f59e0b" }}
@@ -141,10 +137,22 @@ export default function Hero() {
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              <span className="font-extrabold text-text-primary">
-                Fullstack{" "}
-              </span>
-              <span className="font-extrabold grad-cyan">Developer</span>
+              <RotatingText
+                texts={[
+                  "Software Engineer",
+                  "Full-Stack Developer",
+                  "Team Lead",
+                ]}
+                mainClassName="px-2 bg-grad-cyan text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg text-[#fff] font-extrabold w-fit"
+                staggerFrom={"last"}
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-120%" }}
+                staggerDuration={0.025}
+                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                rotationInterval={2000}
+              />
             </motion.h1>
 
             <motion.h1
@@ -232,45 +240,7 @@ export default function Hero() {
             </span>
           </motion.div>
         </motion.div>
-
-        {/* Right: hero illustration with float animation */}
-        <motion.div
-          className="lg:w-[48%] w-full"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-        >
-          <div className="relative">
-            {/* Glow ring behind illustration */}
-            <div className="absolute inset-8 rounded-full bg-accent-amber/10 blur-3xl" />
-            <div className="absolute inset-16 rounded-full bg-accent-cyan/8 blur-2xl" />
-            <motion.img
-              className="relative z-10 h-full w-full drop-shadow-2xl"
-              src="/assets/hero-vector.svg"
-              alt="Hero Illustration"
-              animate={{ y: [0, -14, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
       </div>
-
-      {/* ── Scroll indicator ────────────────────────────────────────────── */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-      >
-        <span className="text-text-muted text-xs tracking-widest uppercase font-medium">
-          Scroll
-        </span>
-        <motion.div
-          className="w-px h-10 bg-gradient-to-b from-accent-amber to-transparent"
-          animate={{ scaleY: [1, 0.4, 1], opacity: [1, 0.4, 1] }}
-          transition={{ duration: 1.8, repeat: Infinity }}
-        />
-      </motion.div>
     </div>
   );
 }
