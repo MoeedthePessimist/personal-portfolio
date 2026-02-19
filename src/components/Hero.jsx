@@ -92,14 +92,25 @@ export default function Hero() {
         >
           {/* Status pill */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent-lime/30 bg-accent-lime/8 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent-lime/30 bg-accent-lime/8 mb-6 mr-1"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
             <span className="w-2 h-2 rounded-full bg-accent-lime pulse-ring" />
-            <span className="text-accent-lime text-xs font-semibold tracking-wider uppercase">
+            <span className="text-[8px] text-accent-lime md:text-xs font-semibold tracking-wider uppercase">
               Available for work
+            </span>
+          </motion.div>
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent-violet/30 bg-accent-violet/8 mb-6 ml-1"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <span className="w-2 h-2 rounded-full bg-accent-violet pulse-ring" />
+            <span className="text-[8px] text-accent-violet md:text-xs font-semibold tracking-wider uppercase">
+              Looking for remote opportunities
             </span>
           </motion.div>
 
@@ -131,29 +142,19 @@ export default function Hero() {
               </span>
             </motion.h1>
 
-            <motion.h1
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
-              <RotatingText
-                texts={[
-                  "Software Engineer",
-                  "Full-Stack Developer",
-                  "Team Lead",
-                ]}
-                mainClassName="px-2 bg-grad-cyan text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg text-[#fff] font-extrabold w-fit"
-                staggerFrom={"last"}
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-120%" }}
-                staggerDuration={0.025}
-                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                rotationInterval={2000}
-              />
-            </motion.h1>
+            <RotatingText
+              texts={["Software Engineer", "Full-Stack Developer", "Team Lead"]}
+              mainClassName="px-2 bg-grad-cyan text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg text-[#fff] font-extrabold w-fit items-center"
+              staggerFrom={"last"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              elementLevelClassName="text-lg md:text-[40px] h-auto items-center flex"
+              rotationInterval={2000}
+            />
 
             <motion.h1
               className="font-light text-text-primary"
