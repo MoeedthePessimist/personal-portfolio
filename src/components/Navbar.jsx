@@ -27,10 +27,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    console.log(activeSection, "active section");
-  }, [activeSection]);
-
   const scrollToSection = (id) => {
     // Works on Home page; on /projects page it falls back to navigating home
     const el = document.getElementById(id);
