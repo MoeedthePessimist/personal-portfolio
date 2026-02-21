@@ -3,3 +3,4 @@
 export { default as Galaxy } from "./Galaxy";
 export { default as RotatingText } from "./RotatingText";
 export { default as ProfileCard } from "./ProfileCard";
+export { default as CircularText } from "./CircularText";

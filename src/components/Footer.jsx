@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { BsGithub } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
+import { CircularText } from "./animations";
+
+const customClass = "w-[100px] h-[100px]";
 
 const LINKS = [
   { Icon: IoMdMail, href: "mailto:awan.moeed@hotmail.com", color: "#fb7185" },
@@ -37,6 +40,13 @@ export default function Footer() {
           src="/assets/small-logo.png"
           alt="Logo"
           whileHover={{ scale: 1.05 }}
+        />
+
+        <CircularText
+          text="HEHE*SPINNY*THING*"
+          onHover="goBonkers"
+          spinDuration={10}
+          className={customClass}
         />
 
         {/* Social icons */}
