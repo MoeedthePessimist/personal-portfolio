@@ -5,7 +5,7 @@ import { BsGithub } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
 import { CircularText } from "./animations";
 
-const customClass = "w-[100px] h-[100px]";
+const customClass = "w-[96px] h-[96px]";
 
 const LINKS = [
   { Icon: IoMdMail, href: "mailto:awan.moeed@hotmail.com", color: "#fb7185" },
@@ -44,7 +44,7 @@ export default function Footer() {
 
         <CircularText
           text="HEHE*SPINNY*THING*"
-          onHover="goBonkers"
+          onHover="slowDown"
           spinDuration={10}
           className={customClass}
         />
