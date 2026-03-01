@@ -1,12 +1,22 @@
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { BiLogoMicrosoft } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6";
 import { TbSend } from "react-icons/tb";
+import { FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/fi";
+import emailjs from "@emailjs/browser";
 import socialLinks from "../assets/social.json";
+
+// ─── EmailJS Config ────────────────────────────────────────────────────────────
+// Replace these with your actual EmailJS credentials
+// Sign up free at https://www.emailjs.com
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+// ───────────────────────────────────────────────────────────────────────────────
 
 const SOCIALS = [
   { Icon: BiLogoMicrosoft, color: "#f59e0b", label: "Portfolio" },
@@ -14,13 +24,24 @@ const SOCIALS = [
   { Icon: BsGithub, color: "#a78bfa", label: "GitHub" },
 ];
 
-function FloatingInput({ type = "text", placeholder, required, as = "input" }) {
+function FloatingInput({
+  type = "text",
+  placeholder,
+  required,
+  as = "input",
+  value,
+  onChange,
+  name,
+}) {
   const [focused, setFocused] = useState(false);
   const Tag = as;
   const common = {
     type: as === "input" ? type : undefined,
     placeholder,
     required,
+    name,
+    value,
+    onChange,
     onFocus: () => setFocused(true),
     onBlur: () => setFocused(false),
     className: `w-full bg-bg-card text-text-primary text-sm placeholder:text-text-muted
@@ -34,9 +55,90 @@ function FloatingInput({ type = "text", placeholder, required, as = "input" }) {
   return <Tag {...common} />;
 }
 
+// Status banner shown after send attempt
+function StatusBanner({ status }) {
+  const config = {
+    success: {
+      icon: <FiCheckCircle className="w-5 h-5 flex-shrink-0" />,
+      text: "Message sent! I'll get back to you soon.",
+      color: "#84cc16",
+      bg: "rgba(132,204,22,0.08)",
+      border: "rgba(132,204,22,0.3)",
+    },
+    error: {
+      icon: <FiAlertCircle className="w-5 h-5 flex-shrink-0" />,
+      text: "Something went wrong. Please try again or email me directly.",
+      color: "#fb7185",
+      bg: "rgba(251,113,133,0.08)",
+      border: "rgba(251,113,133,0.3)",
+    },
+  }[status];
+
+  if (!config) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        key={status}
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.35 }}
+        className="flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium"
+        style={{
+          color: config.color,
+          background: config.bg,
+          borderColor: config.border,
+        }}
+      >
+        {config.icon}
+        <span>{config.text}</span>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 export default function Contact() {
   const ref = useRef(null);
+  const formRef = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.15 });
+
+  const [form, setForm] = useState({
+    from_name: "",
+    reply_to: "",
+    website: "",
+    message: "",
+  });
+  const [status, setStatus] = useState(null); // null | "sending" | "success" | "error"
+
+  const handleChange = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.from_name,
+          reply_to: form.reply_to,
+          website: form.website || "—",
+          message: form.message,
+          to_name: "Abdul Moeed", // Personalise the greeting in your template
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
+
+      setStatus("success");
+      setForm({ from_name: "", reply_to: "", website: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("error");
+    }
+  };
 
   return (
     <motion.section
@@ -93,29 +195,74 @@ export default function Contact() {
             {/* Top gradient strip */}
             <div className="h-[2px] rounded-full mb-6 bg-gradient-to-r from-accent-amber via-accent-cyan to-accent-rose" />
 
-            <form className="space-y-4">
-              <FloatingInput placeholder="Your name" required />
+            {/* Status banner */}
+            {status && status !== "sending" && (
+              <div className="mb-4">
+                <StatusBanner status={status} />
+              </div>
+            )}
+
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <FloatingInput
+                placeholder="Your name"
+                required
+                name="from_name"
+                value={form.from_name}
+                onChange={handleChange}
+              />
               <FloatingInput
                 type="email"
                 placeholder="Email address"
                 required
+                name="reply_to"
+                value={form.reply_to}
+                onChange={handleChange}
               />
-              <FloatingInput placeholder="Your website (if any)" />
+              <FloatingInput
+                placeholder="Your website (if any)"
+                name="website"
+                value={form.website}
+                onChange={handleChange}
+              />
               <FloatingInput
                 as="textarea"
-                placeholder="How can I help you?*"
+                placeholder="How can I help you? *"
                 required
+                name="message"
+                value={form.message}
+                onChange={handleChange}
               />
 
               <div className="flex items-center justify-between gap-4 pt-2 flex-col sm:flex-row">
                 <motion.button
                   type="submit"
+                  disabled={status === "sending"}
                   className="flex items-center gap-2 px-7 py-3 rounded-xl font-bold text-sm
-                             bg-accent-amber text-bg-primary btn-glow w-full sm:w-auto justify-center"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                             bg-accent-amber text-bg-primary btn-glow w-full sm:w-auto
+                             justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                  whileHover={status !== "sending" ? { scale: 1.03 } : {}}
+                  whileTap={status !== "sending" ? { scale: 0.97 } : {}}
                 >
-                  Send Message <TbSend size={16} />
+                  {status === "sending" ? (
+                    <>
+                      <motion.span
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        className="inline-flex"
+                      >
+                        <FiLoader size={16} />
+                      </motion.span>
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      Send Message <TbSend size={16} />
+                    </>
+                  )}
                 </motion.button>
 
                 <div className="flex items-center gap-2">
