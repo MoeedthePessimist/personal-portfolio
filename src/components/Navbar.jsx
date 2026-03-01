@@ -97,7 +97,8 @@ export default function Navbar() {
 
         {/* Resume CTA */}
         <motion.a
-          href="#"
+          href="/Abdul_Moeed_Resume.pdf"
+          download="Abdul_Moeed_Resume.pdf"
           className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold
                      bg-accent-amber text-bg-primary hover:bg-accent-orange transition-colors duration-200
                      shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
@@ -160,7 +161,8 @@ export default function Navbar() {
             </ul>
 
             <motion.a
-              href="#"
+              href="/Abdul_Moeed_Resume.pdf"
+              download="Abdul_Moeed_Resume.pdf"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.32 }}
