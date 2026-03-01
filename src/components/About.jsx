@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { GlareHover } from "./animations";
 
 const STATS = [
   { value: "3+", label: "Years Experience", color: "#f59e0b" },
@@ -34,23 +35,21 @@ export default function About() {
           transition={{ type: "spring", stiffness: 80, damping: 14 }}
           viewport={{ once: true }}
         >
-          <div className="relative">
-            {/* Gradient frame */}
-            {/* <div
-              className="absolute -inset-[2px] rounded-2xl"
-              style={{
-                // background:
-                //   "linear-gradient(135deg, rgba(245,158,11,0.5), rgba(34,211,238,0.3), rgba(167,139,250,0.2))",
-                padding: "2px",
-              }}
-            /> */}
-            <div className="relative rounded-2xl overflow-hidden bg-bg-card p-4">
+          <div className="relative  flex justify-center">
+            <GlareHover
+              glareColor="#ffffff"
+              glareOpacity={0.3}
+              glareAngle={-30}
+              glareSize={300}
+              transitionDuration={800}
+              playOnce={false}
+            >
               <img
-                src="/assets/about-me.svg"
+                src="/assets/about.png"
                 alt="About Me"
-                className="w-full h-auto"
+                className="w-full h-auto "
               />
-            </div>
+            </GlareHover>
 
             {/* Stat chips — floated over the image */}
             <div className="absolute -bottom-5 -right-4 flex flex-col gap-2">

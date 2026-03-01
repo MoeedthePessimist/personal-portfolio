@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { TbDownload } from "react-icons/tb";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 
-const NAV_ITEMS = ["about", "skills", "projects", "contact"];
+const NAV_ITEMS = ["skills", "about", "projects", "contact"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,10 +26,6 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    console.log(activeSection, "active section");
-  }, [activeSection]);
 
   const scrollToSection = (id) => {
     // Works on Home page; on /projects page it falls back to navigating home
@@ -53,7 +49,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="lg:px-28 px-5 py-4 flex items-center justify-between">
+      <div className="lg:px-28 px-5 flex items-center justify-between">
         {/* Logo */}
         <motion.div
           whileHover={{ scale: 1.05 }}
@@ -61,7 +57,7 @@ export default function Navbar() {
           onClick={() => scrollToSection("hero")}
           className="cursor-pointer relative"
         >
-          <img className="h-9 invert" src="/assets/logo.svg" alt="Logo" />
+          <img className="h-20" src="/assets/small-logo.png" alt="Logo" />
           <div className="absolute inset-0 blur-xl opacity-30 bg-accent-amber rounded-full scale-50 pointer-events-none" />
         </motion.div>
 
@@ -101,7 +97,8 @@ export default function Navbar() {
 
         {/* Resume CTA */}
         <motion.a
-          href="#"
+          href="/Abdul_Moeed_Resume.pdf"
+          download="Abdul_Moeed_Resume.pdf"
           className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold
                      bg-accent-amber text-bg-primary hover:bg-accent-orange transition-colors duration-200
                      shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
@@ -164,7 +161,8 @@ export default function Navbar() {
             </ul>
 
             <motion.a
-              href="#"
+              href="/Abdul_Moeed_Resume.pdf"
+              download="Abdul_Moeed_Resume.pdf"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.32 }}
