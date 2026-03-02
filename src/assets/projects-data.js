@@ -53,4 +53,31 @@ export const allProjects = [
     accentBorder: "#B71C1C",
     tags: ["Healthcare", "ML", "Telemedicine"],
   },
+  // ell native app
+  {
+    id: 5,
+    title: "Everybody Loves Learning",
+    tagline: "Language Learning App",
+    description:
+      "A mobile app designed to make language learning fun and accessible for everyone, featuring interactive lessons, gamified exercises, and personalized learning paths.",
+    image: "/assets/ell-native.png",
+    link: "https://play.google.com/store/apps/details?id=com.ell.english",
+    accentBg: "#1A0A2E", // deep violet
+    accentText: "#CE93D8", // soft purple
+    accentBorder: "#7B1FA2",
+    tags: ["EdTech", "Language Learning", "Mobile App"],
+  },
+  {
+    id: 6,
+    title: "Etesal Health",
+    tagline: "Hiring & Healthcare Platform",
+    description:
+      "A platform that connects healthcare professionals with job opportunities and provides tools for managing healthcare workflows, patient records, and remote consultations.",
+    image: "/assets/etesal.png",
+    link: "#",
+    accentBg: "#2E0A0A", // deep crimson
+    accentText: "#FF8A80", // soft red
+    accentBorder: "#B71C1C",
+    tags: ["Healthcare", "Hiring", "Platform"],
+  },
 ];
