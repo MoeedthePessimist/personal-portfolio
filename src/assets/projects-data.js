@@ -40,22 +40,22 @@ export const allProjects = [
     accentBorder: "#2E7D32",
     tags: ["EdTech", "Children", "E-learning"],
   },
-  {
-    id: 4,
-    title: "Pakmedic",
-    tagline: "Telemedicine & ML Health",
-    description:
-      "A telemedicine application with machine learning capabilities, enabling remote consultations, diagnostics assistance, and patient management for healthcare professionals across Pakistan.",
-    image: "/assets/apolloe.png", // placeholder — swap with real image
-    link: "#",
-    accentBg: "#1A0A0A", // deep crimson black
-    accentText: "#FF8A80", // soft red
-    accentBorder: "#B71C1C",
-    tags: ["Healthcare", "ML", "Telemedicine"],
-  },
+  // {
+  //   id: 4,
+  //   title: "Pakmedic",
+  //   tagline: "Telemedicine & ML Health",
+  //   description:
+  //     "A telemedicine application with machine learning capabilities, enabling remote consultations, diagnostics assistance, and patient management for healthcare professionals across Pakistan.",
+  //   image: "/assets/apolloe.png", // placeholder — swap with real image
+  //   link: "#",
+  //   accentBg: "#1A0A0A", // deep crimson black
+  //   accentText: "#FF8A80", // soft red
+  //   accentBorder: "#B71C1C",
+  //   tags: ["Healthcare", "ML", "Telemedicine"],
+  // },
   // ell native app
   {
-    id: 5,
+    id: 4,
     title: "Everybody Loves Learning",
     tagline: "Language Learning App",
     description:
@@ -68,7 +68,7 @@ export const allProjects = [
     tags: ["EdTech", "Language Learning", "Mobile App"],
   },
   {
-    id: 6,
+    id: 5,
     title: "Etesal Health",
     tagline: "Hiring & Healthcare Platform",
     description:
